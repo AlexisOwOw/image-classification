@@ -5,6 +5,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import _criterion
+from decision_tree_classifier import Node, CustomDTC
 #from decision_tree_classifier import DecitionTreeClassifier, DecitionTreeNode
 
 
@@ -33,6 +34,12 @@ def main():
     print("Scikit-learn Naive Bayes Accuracy:", sklearn_accuracy)
 
     print("\nStarting the training process (Custom DTC)...")
+    dtc = CustomDTC()
+    dtc.train_model(train_features_pca, train_labels)
+    test_predictions_dtc = dtc.predict(test_features_pca)
+    test_predictions_dtc = np.array(test_predictions_dtc)
+    accuracy = np.mean(test_predictions == test_labels)
+    print("Custom Decision Tree Classifier:", accuracy)
 
     print("\nStarting the training process (Scikit DTC)...")
     sklearn_dtc = DecisionTreeClassifier()
